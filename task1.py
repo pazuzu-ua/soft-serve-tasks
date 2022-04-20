@@ -17,7 +17,7 @@ from math import sqrt, ceil
 def task_108(num: int) -> None:
     """Prints a number that suffices 2**r and is bigger than *num*,
         if *num* > 1."""
-    if num < 1 or not isinstance(num, int):
+    if num < 1:
         print("Please, enter integer number that is greater than 1")
     else:
         k = 1
@@ -32,7 +32,7 @@ def task_331a(num: int) -> None:
     """Prints a represantation of a *num* as a sum of
         three squared numbers, if possible. 
     """
-    if num < 1 or not isinstance(num, int):
+    if num < 1:
         print("Please, enter integer number that is greater than 1")
     else:
         list_of_sums = form_square_sums(num, True)
@@ -46,7 +46,7 @@ def task_331b(num: int) -> None:
     """Prints all represantations of a *num* as a sum of
         three squared numbers, if possible. 
     """
-    if num < 1 or not isinstance(num, int):
+    if num < 1:
         print("Please, enter integer number that is greater than 1")
     else:
         list_of_sums = form_square_sums(num)
@@ -85,7 +85,7 @@ def square_sum_equals(x: int, y: int, z: int, num: int) -> bool:
 
 if __name__ == "__main__":
     print("*" * 30)
-    task_108(0)
+    task_108("fdfdf")
     task_108(12)
     task_108(16)
 
