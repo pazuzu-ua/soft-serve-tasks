@@ -14,55 +14,39 @@ author: Dmytro Tymoshchenko
 from math import sqrt, ceil
 
 
-def task_108(num: int) -> None:
-    """Prints a number that suffices 2**r and is bigger than *num*,
-        if *num* > 1."""
-    if num < 1:
-        print("Please, enter integer number that is greater than 1")
-    else:
-        k = 1
-        while True:
-            if 2**k > num:
-                print(f"Answer is 2^{k}, which equals to {2**k}")
-                break
-            k += 1
+def task_108(num: int) -> int:
+    """Returns a power of two that is bigger than a *num*"""
+    validate_input(num)
+    power_of_two = 1
+    while True:
+        if 2**power_of_two > num:
+            return power_of_two
+        power_of_two += 1
 
 
-def task_331a(num: int) -> None:
-    """Prints a represantation of a *num* as a sum of
-        three squared numbers, if possible. 
+def task_331a(num: int) -> list[tuple]:
+    """Returns a represantation of a *num* as a sum of
+        three squared numbers, if possible. Or returns
+        an empty list.
     """
-    if num < 1:
-        print("Please, enter integer number that is greater than 1")
-    else:
-        list_of_sums = form_square_sums(num, True)
-        if list_of_sums:
-            print(f"It is possible: {list_of_sums[0]}")
-        else:
-            print("It is impossible...")
+    validate_input(num)
+    return form_square_sums(num, break_at_one=True)
 
 
-def task_331b(num: int) -> None:
-    """Prints all represantations of a *num* as a sum of
-        three squared numbers, if possible. 
+def task_331b(num: int) -> list[tuple]:
+    """Returns all represantations of a *num* as a sum of
+        three squared numbers, if possible. Or returns
+        an empty list.
     """
-    if num < 1:
-        print("Please, enter integer number that is greater than 1")
-    else:
-        list_of_sums = form_square_sums(num)
-        if list_of_sums:
-            print("Answer: ")
-            for el in list_of_sums:
-                print(*el)
-        else:
-            print("It is impossible...")
+    validate_input(num)
+    return form_square_sums(num)
 
 
 # Helper functions
 def form_square_sums(num: int, break_at_one: bool = False) -> list[tuple]:
     """ Forms all represantations of a *num* as a sum of
-         three squared numbers, if possible. Returns list
-         of them, list can be empty.
+         three squared numbers and returns a list of them.
+         List is empty if it is not possible.
          If *break_at_one* is True, it will only compute
          one possible answer.
     """
@@ -74,7 +58,7 @@ def form_square_sums(num: int, break_at_one: bool = False) -> list[tuple]:
                 if square_sum_equals(x, y, z, num):
                     result.append((x, y, z))
                     if break_at_one:
-                        break
+                        return result
     return result
 
 
@@ -83,18 +67,22 @@ def square_sum_equals(x: int, y: int, z: int, num: int) -> bool:
     return x ** 2 + y ** 2 + z ** 2 == num
 
 
+def validate_input(num: int) -> None:
+    """Raises AssertionError if *num* < 1 or is not an integer"""
+    assert isinstance(num, int), "Input needs to be a number"
+    assert num > 1, "Input needs to be more than 1"
+
+
 if __name__ == "__main__":
-    print("*" * 30)
-    task_108("fdfdf")
-    task_108(12)
-    task_108(16)
 
-    print("*" * 30)
-    task_331a(12)
-    task_331a(-9)
-    task_331a(5000)
+    # Check 108
+    print(f"For number 12, the answer is 2^{task_108(12)}")
+    print(f"For number 12, the answer is 2^{task_108(16)}")
 
-    print("*" * 30)
-    task_331b(12)
-    task_331b(-9)
-    task_331b(5000)
+    #Check 331 - a
+    print(f"Possible representaion of 5000 is: {task_331a(5000)}")
+    print(f"Possible representaion of 40 is: {task_331a(40)}")
+
+    #Check 331 - b
+    print(f"Possible representaion of 5000 is: {task_331b(5000)}")
+    print(f"Possible representaion of 40 is: {task_331b(40)}")
