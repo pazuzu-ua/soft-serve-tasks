@@ -70,7 +70,7 @@ def square_sum_equals(x: int, y: int, z: int, num: int) -> bool:
 def validate_input(num: int) -> None:
     """Raises AssertionError if *num* < 1 or is not an integer"""
     assert isinstance(num, int), "Input needs to be a number"
-    assert num > 1, "Input needs to be more than 1"
+    assert num > 0, "Input needs to be more than 0"
 
 
 if __name__ == "__main__":
